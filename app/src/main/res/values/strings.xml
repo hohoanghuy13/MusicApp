@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MusicApp</string>
+    <string name="time_end">3:30</string>
+    <string name="time_start">0:00</string>
+</resources>
