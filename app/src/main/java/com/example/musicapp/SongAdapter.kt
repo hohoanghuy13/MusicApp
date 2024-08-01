@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 class SongAdapter : ListAdapter<Song, SongAdapter.SongViewHolder>(SongComparator()) {
+    private lateinit var onClickItem: OnClickItemSong
+    fun setOnClickSongListener(onClickItemSong: OnClickItemSong) {
+        onClickItem = onClickItemSong
+    }
     class SongViewHolder(itemView: View) : ViewHolder(itemView) {
         private val tvNameSong: TextView = itemView.findViewById(R.id.tvNameSong)
         private val tvNameArtists: TextView = itemView.findViewById(R.id.tvNameArtists)
@@ -39,6 +43,10 @@ class SongAdapter : ListAdapter<Song, SongAdapter.SongViewHolder>(SongComparator
         }
     }
 
+    interface OnClickItemSong {
+        fun getItemData(song: Song)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_song, parent, false)
         return SongViewHolder(view)
@@ -47,5 +55,9 @@ class SongAdapter : ListAdapter<Song, SongAdapter.SongViewHolder>(SongComparator
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
         val song: Song = getItem(position)
         holder.bind(song)
+
+        holder.itemView.setOnClickListener {
+            onClickItem.getItemData(song)
+        }
     }
 }

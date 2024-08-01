@@ -1,5 +1,9 @@
 package com.example.musicapp
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 class Song (
     val id: Int,
     val title: String,
@@ -9,5 +13,6 @@ class Song (
     val songUrl: String,
     val preview: String,
     val releaseDate: Int
-) {
+) : Parcelable {
+
 }
